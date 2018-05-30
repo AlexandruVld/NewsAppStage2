@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">NewsAppStage1</string>
+    <string name="news_title">News Title</string>
+    <string name="news_category">News Category</string>
+    <string name="news_author">News Author</string>
+    <string name="news_date">Date</string>
+    <string name="empty_news">Nothing to display</string>
+    <string name="news_error">News not found!</string>
+    <string name="no_internet">No internet connection.</string>
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">News Settings</string>
+    <string name="no_of_news_label">Maximum Number Of News</string>
+    <string name="no_of_news">no_of_news</string>
+    <string name="default_no_of_news">20</string>
+
+    <string name="settings_order_by_label">Order By</string>
+    <string name="settings_order_by_key" translatable="false">order_by</string>
+    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_newest_date_value</string>
+
+    <string name="settings_order_by_newest_date_label">Newest</string>
+    <string name="settings_order_by_newest_date_value" translatable="false">newest</string>
+
+    <string name="settings_order_by_oldest_date_label">Oldest</string>
+    <string name="settings_order_by_oldest_date_value" translatable="false">oldest</string>
+
+    <string name="settings_order_by_relevance_label">Relevance</string>
+    <string name="settings_order_by_relevance_value" translatable="false">relevance</string>
+
+    <string name="settings_sort_by_label">Sort By</string>
+    <string name="settings_sort_by_key" translatable="false">sort_by</string>
+    <string name="settings_sort_by_default" translatable="false">@string/settings_sort_by_all_news_value</string>
+
+    <string name="settings_sort_by_all_news_label">All news</string>
+    <string name="settings_sort_by_all_news_value" translatable="false">all</string>
+
+    <string name="settings_sort_by_technology_label">Technology</string>
+    <string name="settings_sort_by_technology_value" translatable="false">technology</string>
+
+    <string name="settings_sort_by_sport_label">Sport</string>
+    <string name="settings_sort_by_sport_value" translatable="false">sport</string>
+
+    <string name="settings_sort_by_music_label">Music</string>
+    <string name="settings_sort_by_music_value" translatable="false">music</string>
+
+    <string name="settings_sort_by_books_label">Books</string>
+    <string name="settings_sort_by_books_value" translatable="false">books</string>
+
+    <string name="settings_sort_by_film_label">Film</string>
+    <string name="settings_sort_by_film_value" translatable="false">film</string>
+
+    <string name="settings_sort_by_education_label">Education</string>
+    <string name="settings_sort_by_education_value" translatable="false">education</string>
+
+    <string name="settings_sort_by_world_news_label">World news</string>
+    <string name="settings_sort_by_world_news_value" translatable="false">world</string>
+
+    <string name="settings_sort_by_business_label">Business</string>
+    <string name="settings_sort_by_business_value" translatable="false">business</string>
+
+    <string name="settings_sort_by_fashion_label">Fashion</string>
+    <string name="settings_sort_by_fashion_value" translatable="false">fashion</string>
+
+    <string name="settings_sort_by_politics_label">Politics</string>
+    <string name="settings_sort_by_politics_value" translatable="false">politics</string>
+
+    <string name="guardian_key">3969af52-ba0c-4003-a1a6-7c7705e4001a</string>
+    <string name="all">all</string>
+    <string name="section">category</string>
+    <string name="show_tags">show-tags</string>
+    <string name="author">author</string>
+    <string name="order_by">order-by</string>
+    <string name="sort_by">page-size</string>
+    <string name="api_key">api-key</string>
+</resources>
