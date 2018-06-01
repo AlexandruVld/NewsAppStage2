@@ -17,21 +17,20 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NewsData>> {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NewsData>>,
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String NEWS_REQUEST_URL = "https://content.guardianapis.com/search?";
-
-    // mEmptyStateNews is displayed when there is no data in the list
-    private TextView mEmptyStateNews;
-
-    // Adapter for news
-    private NewsDataAdapter newsDataAdapter;
-
     // Constant value for the news loader ID
     private static final int NEWS_LOADER_ID = 1;
+    // mEmptyStateNews is displayed when there is no data in the list
+    private TextView mEmptyStateNews;
+    // Adapter for news
+    private NewsDataAdapter newsDataAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +47,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // Create new adapter that takes an empty list
         newsDataAdapter = new NewsDataAdapter(this, new ArrayList<NewsData>());
         listNews.setAdapter(newsDataAdapter);
+
+        // Obtain a reference to the SharedPreferences file for this app
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        // And register to be notified of preference changes
+        // So we know when the user has adjusted the query settings
+        prefs.registerOnSharedPreferenceChangeListener(this);
 
         // Set an item click listener on the ListView, which sends an intent to a web browser
         // to open a website with more information about the selected news
@@ -91,6 +96,22 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
+    public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+        if (key.equals(getString(R.string.no_of_news)) ||
+                key.equals(getString(R.string.settings_sort_by_key)) || key.equals(getString(R.string.settings_order_by_key))) {
+            // Clear the ListView as a new query will be kicked off
+            newsDataAdapter.clear();
+            // Hide the empty state text view as the loading indicator will be displayed
+            mEmptyStateNews.setVisibility(View.GONE);
+            // Show the loading indicator while new data is being fetched
+            View loadingIndicator = findViewById(R.id.loader);
+            loadingIndicator.setVisibility(View.VISIBLE);
+            // Restart the loader to requery as the query settings have been updated
+            getLoaderManager().restartLoader(NEWS_LOADER_ID, null, this);
+        }
+    }
+
+    @Override
     public Loader<List<NewsData>> onCreateLoader(int id, Bundle args) {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -117,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             uriBuilder.appendQueryParameter(getString(R.string.section), sortBySection);
         }
 
-        uriBuilder.appendQueryParameter(getString(R.string.show_tags), getString(R.string.author));
+        uriBuilder.appendQueryParameter(getString(R.string.show_tags), getString(R.string.contributor));
         uriBuilder.appendQueryParameter(getString(R.string.order_by), orderByDate);
         uriBuilder.appendQueryParameter(getString(R.string.sort_by), noOfNews);
         uriBuilder.appendQueryParameter(getString(R.string.api_key), getString(R.string.guardian_key));
@@ -151,16 +172,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     // Initialize the contents of the Activity's options menu
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the Options Menu
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings){
+        if (id == R.id.action_settings) {
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingsIntent);
             return true;

@@ -37,7 +37,7 @@ public class NewsData {
         return mTitle;
     }
 
-    // Returns the author of the news
+    // Returns the contributor of the news
     public String getAuthor() {
         return mAuthor;
     }

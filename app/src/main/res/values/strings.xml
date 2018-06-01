@@ -65,9 +65,9 @@
 
     <string name="guardian_key">3969af52-ba0c-4003-a1a6-7c7705e4001a</string>
     <string name="all">all</string>
-    <string name="section">category</string>
+    <string name="section">q</string>
     <string name="show_tags">show-tags</string>
-    <string name="author">author</string>
+    <string name="contributor">contributor</string>
     <string name="order_by">order-by</string>
     <string name="sort_by">page-size</string>
     <string name="api_key">api-key</string>
